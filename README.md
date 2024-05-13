@@ -38,6 +38,95 @@ The TieredRag library employs several techniques to reduce the time required for
 
 4. **Caching**: The library can be extended to incorporate caching mechanisms to store frequently accessed context chunks or generated responses. Caching can significantly reduce the response time for recurring queries or similar questions.
 
+## Getting Started
+
+To start using the TieredRag library in your project, follow these steps:
+
+1. Install the required dependencies:
+   ```
+   pip install asyncpg openai
+   ```
+
+2. Import the `TieredRag` class in your Python script or application:
+   ```python
+   from tiered_rag_library import TieredRag
+   ```
+
+3. Create an instance of the `TieredRag` class by providing the necessary configuration:
+   ```python
+   api_key = "your_openai_api_key"
+   database_config = {
+       "database": "your_database_name",
+       "user": "your_username",
+       "password": "your_password",
+       "host": "your_host",
+       "port": "your_port"
+   }
+
+   tiered_rag = TieredRag(api_key, database_config)
+   ```
+   Replace `"your_openai_api_key"` with your actual OpenAI API key and provide the appropriate values for your database configuration.
+
+4. Use the available methods of the `TieredRag` class to generate responses based on your input text and query:
+   ```python
+   text = "Your input text goes here"
+   match_thresholds = [0.8, 0.7, 0.6]
+   match_count = 5
+   query = "SELECT * FROM your_table WHERE ..."
+
+   response = await tiered_rag.tier_generate_comprehensive_answer(text, match_thresholds, match_count, query)
+   print(response)
+   ```
+   - `text`: The input text for which you want to generate a response.
+   - `match_thresholds`: A list of similarity thresholds for the tiered search. Adjust these values based on your requirements.
+   - `match_count`: The maximum number of matches to retrieve from the database for each threshold.
+   - `query`: The SQL query to execute for retrieving relevant context chunks from the database. Replace `your_table` with the actual table name and add any necessary conditions.
+
+   The `tier_generate_comprehensive_answer` method returns the generated comprehensive response based on the input text and the retrieved context chunks.
+
+5. Run your Python script or application to generate responses using the TieredRag library.
+
+## Example Usage
+
+Here's an example of how to use the TieredRag library to generate a response for a given input text:
+
+```python
+import asyncio
+from tiered_rag_library import TieredRag
+
+async def main():
+    api_key = "your_openai_api_key"
+    database_config = {
+        "database": "your_database_name",
+        "user": "your_username",
+        "password": "your_password",
+        "host": "your_host",
+        "port": "your_port"
+    }
+
+    tiered_rag = TieredRag(api_key, database_config)
+
+    text = "What is the capital of France?"
+    match_thresholds = [0.8, 0.7, 0.6]
+    match_count = 5
+    query = "SELECT * FROM your_table WHERE ..."
+
+    response = await tiered_rag.tier_generate_comprehensive_answer(text, match_thresholds, match_count, query)
+    print(response)
+
+asyncio.run(main())
+```
+
+In this example, we create an instance of the `TieredRag` class with the provided API key and database configuration. We then define the input text, similarity thresholds, match count, and SQL query.
+
+Finally, we call the `tier_generate_comprehensive_answer` method to generate a comprehensive response based on the input text and the retrieved context chunks. The generated response is printed to the console.
+
+Make sure to replace `"your_openai_api_key"`, `"your_database_name"`, `"your_username"`, `"your_password"`, `"your_host"`, `"your_port"`, and `"your_table"` with the appropriate values for your setup.
+
+Note: The TieredRag library uses asynchronous programming, so make sure to run the code within an asynchronous context using `asyncio.run()` or by defining an asynchronous main function.
+
+That's it! You can now use the TieredRag library to generate comprehensive responses based on your input text and database queries. Feel free to explore and customize the library further to suit your specific requirements. ## It maybe be broken as I haven't gotten the time fix it up properly. But feel free to request fixes. 
+
 ## Conclusion
 
 The TieredRag library provides a powerful and efficient solution for generating comprehensive responses using a cost-effective language model. By leveraging vector similarity search, tiered retrieval, and asynchronous processing, the library improves the model's understanding of ranked items, enhances its memory recall, and reduces the response generation time. This approach has the potential to outperform more expensive models while maintaining high-quality output.

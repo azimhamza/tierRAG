@@ -134,4 +134,4 @@ The TieredRag library provides a powerful and efficient solution for generating 
 The library can be easily integrated into existing applications or scripts, making it a valuable tool for various natural language processing tasks. With its modular design and customizable prompts, the TieredRag library offers flexibility and extensibility to adapt to different use cases and datasets.
 
 
-### There is significant places to improve espically with reducing timing of generation to more better caching of responses.
+### There is significant places to improve espically with reducing timing of generation to more better caching of responses. Please suggest any changes to imrprove reduce the wait time and cost of tokens. thnx ✌️
